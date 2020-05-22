@@ -105,7 +105,7 @@ class MovieController {
     }
     
     func fetchMoviesFromServer(completion: @escaping CompletionHandler = { _ in }) {
-        let requestURL = baseURL.appendingPathComponent("json")
+        let requestURL = baseURL.appendingPathExtension("json")
         
         URLSession.shared.dataTask(with: requestURL) { data, _, error in
             if let error = error {
@@ -158,7 +158,7 @@ class MovieController {
         var moviesToChoose = representationsById
         
         let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "indentifier IN %@", identifiersToFetch)
+        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
         
         let context = CoreDataStack.shared.container.newBackgroundContext()
         
